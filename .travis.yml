@@ -130,8 +130,9 @@ install:
     - if [[ $SETUP_CMD == 'test --coverage' ]]; then $PIP_INSTALL coverage coveralls; fi
 
 script:
-    - python setup.py $SETUP_CMD
-    - if [[ $SETUP_CMD == build_sphinx* ]]; then linkchecker docs/_build/html; fi
+    - python -c "from sherpa.astro import io"
+    #i- python setup.py $SETUP_CMD
+    #- if [[ $SETUP_CMD == build_sphinx* ]]; then linkchecker docs/_build/html; fi
 
 after_success:
     - if [[ $SETUP_CMD == 'test --coverage' ]]; then coveralls --rcfile='gammapy/tests/coveragerc'; fi
